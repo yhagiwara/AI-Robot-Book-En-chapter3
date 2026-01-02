@@ -1,50 +1,50 @@
-# 第３章　音声認識・合成（改訂第2版）
-## 概要
-ROS 2とPythonで作って学ぶAIロボット入門 改訂第2版（出村・萩原・升谷・タン著，講談社）第３章のサンプルプログラムと補足情報などを掲載しています．
+# Chapter 3: Speech Recognition and Synthesis (Revised 2nd Edition)
+## Overview
+This repository provides sample programs and supplementary information for Chapter 3.
 
-## インストール
-- オーディオ関連を扱うためのライブラリを以下のコマンドでインストールします．
+## Installation
+- Install libraries required for handling audio using the following commands.
 ```
 sudo apt install portaudio19-dev
 sudo apt install pulseaudio
 ```
-- Pythonのモジュールとして呼びたすために，以下のコマンドを実行します．
+- To use them as Python modules, run the following command.
 ```
 pip3 install pyaudio
 ```
-- 音声認識ライブラリを以下のコマンドでインストールします．
+- Install a speech recognition library using the following command.
 ```
 pip3 install SpeechRecognition
 ```
-- 音声認識器のWhisperを扱うためのライブラリを以下のコマンドでインストールします.
+- Install libraries required to use Whisper as a speech recognizer using the following command.
 ```
 pip3 install SpeechRecognition[whisper-local] soundfile
 ```
-- 音声合成で用いるライブラリをインストールします。
+- Install libraries used for speech synthesis.
 ```
 pip3 install gTTS
 sudo apt install mpg123
 pip3 install mpg123
 ```
-- サンプルプログラムを以下のコマンドでGitHubからクローンします．
+- Clone the sample programs from GitHub using the following command.
 ```
 cd ~/airobot_ws/src
 git clone https://github.com/AI-Robot-Book-Humble/chapter3
 ```
-- 以下のコマンドでパッケージをビルドします．
+- Build the package using the following commands.
 ```
 cd ~/airobot_ws
 colcon build
 source install/setup.bash
 ```
 
-## ディレクトリ構成
-- **[speech_action](speech_action):** アクション通信による音声認識と音声合成のサンプルプログラム
-- **[speech_service](speech_service):** サービス通信による音声認識と音声合成のサンプルプログラム
-- **[speech_topic](speech_topic):** トピック通信による音声認識と音声合成のサンプルプログラム
-   
-## 補足情報
- - ３章のサンプルプログラムをDockerコンテナで実行する場合，**Ubuntuをホストにする場合のみ動作を確認しています**．Windowsで開発されている方は，VMWareなどのバーチャルマシンにUbuntuをインストールしてサンプルプログラムを実行する事ができます．
- - 実行するUbuntuの環境でマイクからの音声入力とスピーカーからの音の出力が出来ていることを事前に確認してください．
- - バーチャルマシン上のUbuntuを使用する場合は、遅れが生じて音声が出力されない事があります．長めの発話文を入力するなどして対応して下さい．
- - 可能であればベッドセットを使用してください．オウム返しの実行中にスピーカーの音がマイクに回って繰り返す場合があります．
+## Directory Structure
+- **[speech_action](speech_action):** Sample programs for speech recognition and speech synthesis using action communication
+- **[speech_service](speech_service):** Sample programs for speech recognition and speech synthesis using service communication
+- **[speech_topic](speech_topic):** Sample programs for speech recognition and speech synthesis using topic communication
+
+## Additional Notes
+- When running the sample programs from Chapter 3 in a Docker container, **we have confirmed operation only when Ubuntu is used as the host OS**. If you are developing on Windows, you can install Ubuntu in a virtual machine such as VMware and run the sample programs there.
+- Before running the programs, make sure that your Ubuntu environment can receive audio input from the microphone and output sound through the speakers.
+- If you are using Ubuntu in a virtual machine, latency may occur and audio may not be output. In that case, try using longer utterances as a workaround.
+- If possible, please use a headset. During echo/back (repeat-after-me) execution, the speaker output may be picked up by the microphone and cause repeated feedback.
