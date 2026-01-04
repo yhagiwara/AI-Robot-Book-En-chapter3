@@ -4,7 +4,7 @@ from rclpy.node import Node
 from rclpy.action import ActionServer, CancelResponse
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
-from airobot_interfaces.action import StringCommand
+from airobot_interfaces.action import StringCommand ##TO DO FIX IMPORT
 from gtts import gTTS
 from io import BytesIO
 from mpg123 import Mpg123, Out123
@@ -13,7 +13,7 @@ from mpg123 import Mpg123, Out123
 class SpeechSynthesisServer(Node):
     def __init__(self):
         super().__init__('speech_synthesis_server')
-        self.get_logger().info('音声合成サーバを起動します．')
+        self.get_logger().info('Starting speech synthesis server.')
         # self.lang = 'ja-JP'
         self.lang = 'en'
         self.out = Out123()
@@ -33,19 +33,19 @@ class SpeechSynthesisServer(Node):
     def handle_accepted_callback(self, goal_handle):
         with self.goal_lock:
             if self.goal_handle is not None and self.goal_handle.is_active:
-                self.get_logger().info('前の発話を中止')
+                self.get_logger().info('Stopping previous utterance’')
                 self.goal_handle.abort()
             self.goal_handle = goal_handle
         goal_handle.execute()
 
     def execute_callback(self, goal_handle):
         with self.execute_lock:
-            self.get_logger().info('実行...')
+            self.get_logger().info('Executing...')
             result = StringCommand.Result()
             result.answer = 'NG'
             if goal_handle.request.command != '':
                 text = goal_handle.request.command
-                self.get_logger().info(f'発話： {text}')
+                self.get_logger().info(f'Utterance: {text}')
                 tts = gTTS(text, lang=self.lang[:2])
                 fp = BytesIO()
                 tts.write_to_fp(fp)
@@ -54,12 +54,12 @@ class SpeechSynthesisServer(Node):
                 mp3.feed(fp.read())
                 for frame in mp3.iter_frames(self.out.start):
                     if not goal_handle.is_active:
-                        self.get_logger().info('中止')
+                        self.get_logger().info('Stopped')
                         return result
 
                     if goal_handle.is_cancel_requested:
                         goal_handle.canceled()
-                        self.get_logger().info('キャンセル')
+                        self.get_logger().info('Canceled')
                         return result
 
                     self.out.play(frame)
@@ -69,7 +69,7 @@ class SpeechSynthesisServer(Node):
             return result
 
     def cancel_callback(self, goal_handle):
-        self.get_logger().info('キャンセル受信')
+        self.get_logger().info('Cancel request received')
         return CancelResponse.ACCEPT
 
 
