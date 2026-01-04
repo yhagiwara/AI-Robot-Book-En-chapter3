@@ -40,8 +40,6 @@ source install/setup.bash
 
 ## Directory Structure
 - **[speech_action](speech_action):** Sample programs for speech recognition and speech synthesis using action communication
-- **[speech_service](speech_service):** Sample programs for speech recognition and speech synthesis using service communication
-- **[speech_topic](speech_topic):** Sample programs for speech recognition and speech synthesis using topic communication
 
 ## Additional Notes
 - When running the sample programs from Chapter 3 in a Docker container, **we have confirmed operation only when Ubuntu is used as the host OS**. If you are developing on Windows, you can install Ubuntu in a virtual machine such as VMware and run the sample programs there.
