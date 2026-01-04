@@ -1,74 +1,80 @@
 # speech_action
-## 概要
-３章のサンプルプログラム  
-音声認識と音声合成を実行するプログラム
+## Overview  
+Sample programs for Chapter 3  
+Programs for performing speech recognition and speech synthesis using ROS 2 and Whisper.
 
 
-## 実行
-- 音声認識の実行手順（3.1節）
-  - 端末を開いて /speech トピックへパブリッシュしたデータを見られるようにします．
-    ```
+## Execution
+- Speech Recognition (Section 3.1)  
+  - Open a terminal and echo the `/speech` topic to check published data:
+    ```bash
     ros2 topic echo /speech
     ```
-  - 新しい端末を開いて音声認識サーバを起動します．
-    ```
+  - Open a new terminal and start the speech recognition server:
+    ```bash
     ros2 run speech_action speech_recognition_server
     ```
-  - さらに新しい端末を開いて音声認識クライアントを起動します．
-    ```
+  - Open another terminal and start the speech recognition client:
+    ```bash
     ros2 run speech_action speech_recognition_client
     ```
-  - 待機中になるので,Enterを押します
-  - マイクに向かって発話します．
-  - 途中でキャンセルしたい場合は,cを入力します
+  - The client will wait in standby. Press Enter to begin.
+  - Speak into the microphone.
+  - To cancel during input, press `c`.
   
-- 音声合成の実行手順（3.2節）
-  - 端末を開いて音声合成サーバを起動します．
-    ```
+- Speech Synthesis (Section 3.2)  
+  - Open a terminal and start the speech synthesis server:
+    ```bash
     ros2 run speech_action speech_synthesis_server
     ```
-  - 新しい端末を開いて音声合成クライアントを起動します．
-    ```
+  - Open a new terminal and start the speech synthesis client:
+    ```bash
     ros2 run speech_action speech_synthesis_client
     ```
-  - 新しい端末を開いて発話させたいメッセージを /speech に送ります．
-    ```
+  - Open another terminal and publish a message to the `/speech` topic:
+    ```bash
     ros2 topic pub -1 /speech std_msgs/msg/String "{data: 'I will go to the kitchen and grab a bottle.'}"
     ```
-  - スピーカから音声が出力されます．
+  - The message will be spoken aloud through the speaker.
 
-- アクション通信によるオウム返しの実行手順（3.3.1節）
-  - 端末を開いて音声合成サーバを起動します．
-    ```
+- Speech Echo Using Action Communication (Section 3.3.1)  
+  - Open a terminal and start the speech recognition server:
+    ```bash
     ros2 run speech_action speech_recognition_server
     ```
-  - 新しい端末を開いて音声認識サーバを起動します．
-    ```
+  - Open a new terminal and start the speech synthesis server:
+    ```bash
     ros2 run speech_action speech_synthesis_server
     ```
-  - さらに新しい端末を開いて音声認識サーバを起動します．
-    ```
+  - Open another terminal and start the speech client:
+    ```bash
     ros2 run speech_action speech_client
     ```
-  - マイクに向かって発話すると同じ発話がスピーカから返ってきます．
+  - Speak into the microphone. The same phrase will be echoed back through the speaker.
   
 
-## ヘルプ
-- このサンプルプログラムをDockerコンテナで実行する場合，**Ubuntuをホストにする場合のみ動作を確認しています**．Windowsで開発されている方は，VMWareなどのバーチャルマシンにUbuntuをインストールしてサンプルプログラムを実行する事ができます．
-- 音声認識の実行手順において，音声がスピーカーから出力されない場合は，speech_synthesis_server_mpg123.pyからの実行を試してください．音声合成されたmp3ファイルが出力されるので，そのファイルを再生して確認してください．
-- 音声認識の実行手順において，Whisperのモデルサイズや認識する言語を変更する場合は，recognition.pyの中にあるrecognize_whisperの引数を変更してください．modelは[https://github.com/openai/whisper#available-models-and-languages](https://github.com/openai/whisper#available-models-and-languages)，languageは[https://github.com/openai/whisper/blob/main/whisper/tokenizer.py](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py)を参照し，使用可能なモデルと言語を記載してください．
+## Help
+- If you plan to run this sample in a Docker container, please note that it has only been tested with **Ubuntu as the host OS**.  
+  For those developing on Windows, you can install Ubuntu on a virtual machine (e.g., VMWare) and run the sample programs there.
+
+- If speech output is not heard during the speech synthesis step, try running `speech_synthesis_server_mpg123.py`.  
+  This will generate a synthesized MP3 file which you can manually play to verify the output.
+
+- To change the Whisper model size or recognition language, modify the arguments of `recognize_whisper` inside `recognition.py`.  
+  Refer to the following for available models and languages:  
+  - Model: [https://github.com/openai/whisper#available-models-and-languages](https://github.com/openai/whisper#available-models-and-languages)  
+  - Language: [https://github.com/openai/whisper/blob/main/whisper/tokenizer.py](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py)
 
 
-## 著者
-萩原　良信
+## Authors
+Yoshinobu Hagiwara 
 
-## 履歴
-- 2022-08-28: 初期版
-- 2024-01-26: 改訂版
+## Revision History 
+- 2026-xx-xx: Initial version #TO DO
 
-## ライセンス
-Copyright (c) 2022-2025, Yoshinobu Hagiwara, Okuma Yuki, Valentin Cardenas Keith, Masaki Ito and Shoichi Hasegawa
+## License
+Copyright (c) 2026, Yoshinobu Hagiwara, Lucas da Mota Bruno and Jiahao Sim
 All rights reserved.
 This project is licensed under the Apache-2.0 license found in the LICENSE file in the root directory of this project.
 
-## 参考文献
+## References 

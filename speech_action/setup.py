@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Masaki Ito',
+    maintainer='Yoshinobu Hagiwara',
     maintainer_email='ai-robot-book@googlegroups.com',
     description='ROS2 package for speech recognition and speech synthesis',
     license='Apache License 2.0',

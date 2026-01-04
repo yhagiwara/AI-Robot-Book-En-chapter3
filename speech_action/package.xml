@@ -4,7 +4,7 @@
   <name>speech_action</name>
   <version>2.0.0</version>
   <description>ROS2 package for speech recognition and speech synthesis</description>
-  <maintainer email="ai-robot-book@googlegroups.com">Masaki Ito</maintainer>
+  <maintainer email="ai-robot-book@googlegroups.com">Yoshinobu Hagiwara</maintainer>
   <license>Apache License 2.0</license>
 
   <test_depend>ament_copyright</test_depend>
